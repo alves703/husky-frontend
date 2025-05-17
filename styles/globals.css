@@ -1,13 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+/* Reset para SVGs e containers */
+svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Garanta que os containers tenham limites */
+.max-w-md {
+  max-width: 28rem !important;
+}
+
+/* Previna que elementos ocupem toda a tela */
+body, html {
+  overflow-x: hidden;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-    to bottom,
-    transparent,
-    rgb(var(--background-end-rgb))
-  );
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
     rgb(var(--background-start-rgb));
+}
 
-  min-height: 100vh;
-  margin: 0;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

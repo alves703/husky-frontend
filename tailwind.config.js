@@ -9,6 +9,19 @@ module.exports = {
     "./styles/**/*.{js,ts,jsx,tsx}",
     "./services/**/*.{js,ts,jsx,tsx}"
   ],
+  safelist: [
+    'w-12',
+    'h-12',
+    'max-w-md',
+    'rounded-lg',
+    'shadow-lg',
+    'max-h-5',
+    'max-w-5',
+    'max-h-4',
+    'max-w-4',
+    'max-w-[3rem]',
+    'max-h-[3rem]'
+  ],
   theme: {
     extend: {},
   },
