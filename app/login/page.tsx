@@ -38,7 +38,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 relative overflow-hidden">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-2">
-            <svg className="w-16 h-16 text-blue-600" viewBox="0 0 100 100" fill="currentColor">
+            <svg className="w-16 h-16 max-w-[64px] text-blue-600" viewBox="0 0 100 100" fill="currentColor">
               <path d="M50,0 L70,20 L90,0 L90,40 L70,60 L50,40 L30,60 L10,40 L10,0 L30,20 Z" />
               <circle cx="30" cy="25" r="5" fill="white" />
               <circle cx="70" cy="25" r="5" fill="white" />
