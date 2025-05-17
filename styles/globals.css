@@ -8,20 +8,39 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-/* Reset para SVGs e containers */
+/* Reset agressivo para SVGs e containers */
 svg {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
 }
 
-/* Garanta que os containers tenham limites */
+/* Garanta que os containers tenham limites estritos */
 .max-w-md {
   max-width: 28rem !important;
+  width: 100% !important;
 }
 
 /* Previna que elementos ocupem toda a tela */
 body, html {
   overflow-x: hidden;
+}
+
+/* Forçar tamanhos específicos para ícones */
+svg.h-4, svg.w-4, svg.h-5, svg.w-5, svg.h-8, svg.w-8, svg.h-12, svg.w-12 {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+}
+
+/* Forçar tamanho do logo */
+.text-center svg {
+  width: 70px !important;
+  height: 70px !important;
+  max-width: 70px !important;
+  max-height: 70px !important;
 }
 
 body {

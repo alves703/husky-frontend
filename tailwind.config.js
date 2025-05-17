@@ -20,7 +20,15 @@ module.exports = {
     'max-h-4',
     'max-w-4',
     'max-w-[3rem]',
-    'max-h-[3rem]'
+    'max-h-[3rem]',
+    'w-full',
+    'h-full',
+    'text-blue-600',
+    'bg-white',
+    'rounded-full',
+    'flex',
+    'items-center',
+    'justify-center'
   ],
   theme: {
     extend: {},
