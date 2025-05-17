@@ -11,15 +11,13 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+    to bottom,
+    transparent,
+    rgb(var(--background-end-rgb))
+  );
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
