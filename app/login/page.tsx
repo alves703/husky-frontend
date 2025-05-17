@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
@@ -26,122 +26,90 @@ export default function LoginPage() {
           role: 'admin'
         }));
         router.push('/dashboard');
-      }, 1000);
+      }, 2000);
     } catch (err) {
-      setError('Credenciais inválidas. Por favor, tente novamente.');
+      setError('Erro ao fazer login.');
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 bg-gradient-to-br from-blue-50 to-white p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 relative overflow-hidden">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-2">
-            <svg className="w-16 h-16 max-w-[64px] text-blue-600" viewBox="0 0 100 100" fill="currentColor">
-              <path d="M50,0 L70,20 L90,0 L90,40 L70,60 L50,40 L30,60 L10,40 L10,0 L30,20 Z" />
-              <circle cx="30" cy="25" r="5" fill="white" />
-              <circle cx="70" cy="25" r="5" fill="white" />
-              <path d="M40,45 C40,45 45,55 50,55 C55,55 60,45 60,45" stroke="white" strokeWidth="3" fill="none" />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="p-8">
+          <div className="flex flex-col items-center mb-8">
+            <svg className="w-24 h-24 mb-4 text-blue-600" viewBox="0 0 100 100" fill="currentColor">
+              <circle cx="50" cy="50" r="45" fill="#3b82f6" />
+              <path d="M30 40 Q50 30 70 40 Q75 50 70 60 Q50 70 30 60 Q25 50 30 40" fill="white" />
+              <circle cx="40" cy="45" r="5" fill="#1e3a8a" />
+              <circle cx="60" cy="45" r="5" fill="#1e3a8a" />
+              <path d="M40 60 Q50 65 60 60" stroke="#1e3a8a" strokeWidth="2" fill="none" />
+              <path d="M20 30 Q10 50 20 70" stroke="#1e3a8a" strokeWidth="3" fill="none" />
+              <path d="M80 30 Q90 50 80 70" stroke="#1e3a8a" strokeWidth="3" fill="none" />
+              <path d="M35 75 Q50 85 65 75" stroke="#1e3a8a" strokeWidth="2" fill="none" />
             </svg>
+            <h1 className="text-3xl font-bold text-gray-800">HuskyApp</h1>
+            <p className="text-gray-500 mt-2">Acesse sua conta administrativa</p>
           </div>
-          <h1 className="text-5xl font-bold text-gray-900 mb-2">HuskyApp</h1>
-          <p className="text-gray-600">Acesse sua conta administrativa</p>
-        </div>
-
-        <form onSubmit={handleLogin}>
-          <div className="mb-4 relative">
-            <div className="flex items-center border border-green-500 rounded-md overflow-hidden">
-              <div className="pl-3 pr-2 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="relative">
               <input
                 type="email"
-                className="w-full py-3 px-2 outline-none"
-                placeholder="Digite seu email"
+                required
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                placeholder="Seu e-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
               />
-            </div>
-          </div>
-
-          <div className="mb-2 relative">
-            <div className="flex items-center border border-blue-500 rounded-md overflow-hidden">
-              <div className="pl-3 pr-2 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i className="fas fa-envelope text-gray-400"></i>
               </div>
+            </div>
+            <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
-                className="w-full py-3 px-2 outline-none"
-                placeholder="Digite sua senha"
+                type={showPassword ? 'text' : 'password'}
+                required
+                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                placeholder="Sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
               />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i className="fas fa-lock text-gray-400"></i>
+              </div>
               <button
                 type="button"
-                className="px-3 text-gray-400 hover:text-gray-600"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-blue-500"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                )}
+                <i className={showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'}></i>
               </button>
             </div>
-          </div>
-
-          <div className="text-right mb-4">
-            <a href="#" className="text-purple-600 text-sm hover:underline">Esqueceu a senha?</a>
-          </div>
-
-          {error && (
-            <div className="mb-4 p-2 bg-red-50 text-red-600 text-sm rounded">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md transition-colors font-medium"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Entrando...
-              </div>
-            ) : (
-              'Entrar'
-            )}
-          </button>
-        </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-gray-600 text-sm">Área restrita apenas para administradores</p>
-          <div className="mt-2 text-sm">
-            <span className="text-gray-600">Não tem uma conta? </span>
-            <button 
-              onClick={() => router.push('/register')}
-              className="text-blue-600 hover:underline font-medium"
+            {error && <div className="text-sm text-red-600 bg-red-50 p-2 rounded">{error}</div>}
+            <button
+              type="submit"
+              className="w-full flex justify-center items-center py-3 px-4 rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition"
+              disabled={isLoading}
             >
+              {isLoading ? (
+                <>
+                  <span className="mr-2">Autenticando...</span>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </>
+              ) : (
+                'Entrar'
+              )}
+            </button>
+          </form>
+        </div>
+        <div className="bg-gray-50 px-8 py-6 text-center">
+          <p className="text-sm text-gray-500">Área restrita apenas para administradores</p>
+          <p className="mt-2 text-sm text-gray-500">
+            Não tem uma conta?{' '}
+            <button onClick={() => router.push('/register')} className="text-blue-600 hover:text-blue-500 font-medium">
               Registre-se aqui
             </button>
-          </div>
+          </p>
         </div>
       </div>
     </div>
